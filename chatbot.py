@@ -2,6 +2,7 @@
 
 import os
 import weather
+import korean
 from flask import Flask, request, Response
 from slackclient import SlackClient
 
@@ -53,6 +54,12 @@ def inbound():
 @app.route('/',methods=['GET'])
 def test():
     return Response("It works!")
+
+@app.route('/Test',methods=['GET'])
+def get():
+    query = request.args.get('query')
+    result = korean.getKorean(query)
+    return result
 
 if __name__ == "__main__":
     app.run(debug=True)
